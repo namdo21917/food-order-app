@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "14688943808",
+    "project_id": "foododer-app",
+    "storage_bucket": "foododer-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:14688943808:android:3da6a0b54705cbbd1cf725",
+        "android_client_info": {
+          "package_name": "com.example.foododer_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAO-STrGQ7teJeWqeKJX-Cck9d1w2b1dUM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
