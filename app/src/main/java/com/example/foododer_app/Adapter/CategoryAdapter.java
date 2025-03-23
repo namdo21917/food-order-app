@@ -50,31 +50,31 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.viewho
                 break;
             }
             case 1: {
-                holder.pic.setBackgroundResource(R.drawable.cat_1_background);
+                holder.pic.setBackgroundResource(R.drawable.cat_0_background);
                 break;
             }
             case 2: {
-                holder.pic.setBackgroundResource(R.drawable.cat_2_background);
+                holder.pic.setBackgroundResource(R.drawable.cat_0_background);
                 break;
             }
             case 3: {
-                holder.pic.setBackgroundResource(R.drawable.cat_3_background);
+                holder.pic.setBackgroundResource(R.drawable.cat_0_background);
                 break;
             }
             case 4: {
-                holder.pic.setBackgroundResource(R.drawable.cat_4_background);
+                holder.pic.setBackgroundResource(R.drawable.cat_0_background);
                 break;
             }
             case 5: {
-                holder.pic.setBackgroundResource(R.drawable.cat_5_background);
+                holder.pic.setBackgroundResource(R.drawable.cat_0_background);
                 break;
             }
             case 6: {
-                holder.pic.setBackgroundResource(R.drawable.cat_6_background);
+                holder.pic.setBackgroundResource(R.drawable.cat_0_background);
                 break;
             }
             case 7: {
-                holder.pic.setBackgroundResource(R.drawable.cat_7_background);
+                holder.pic.setBackgroundResource(R.drawable.cat_0_background);
                 break;
             }
 

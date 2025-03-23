@@ -28,14 +28,14 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:layout_marginTop="16dp"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
-                    android:text="Food"
+                    android:text="食事"
                     android:textSize="45sp"
                     android:textStyle="bold"
                     android:textColor="@color/blue_gray"/>
@@ -44,8 +44,8 @@
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="App"
-                    android:textSize="45sp"
+                    android:text="Dịch vụ ship đồ ăn chuyên nghiệp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="@color/blue_gray"/>
 
@@ -155,13 +155,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     app:srcCompat="@drawable/google" />
-
-                <ImageView
-                    android:id="@+id/twitter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/twitter" />
             </LinearLayout>
 
             <LinearLayout
@@ -183,7 +176,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Đăng ký"
-                    android:textColor="@color/red"
+                    android:textColor="@color/aqua"
                     android:textSize="16sp"/>
             </LinearLayout>
         </LinearLayout>
