@@ -29,7 +29,7 @@
                     android:id="@+id/textView9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Welcome"
+                    android:text="Bạn đói chưa"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,7 +38,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nam"
-                    android:textStyle="bold"
+                    android:textStyle="italic"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/textView9"
                     app:layout_constraintTop_toBottomOf="@+id/textView9" />
@@ -187,9 +187,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Chọn danh mục"
+                android:text="Loại đồ ăn"
                 android:textColor="@color/blue_gray"
-                android:textSize="22dp"
+                android:textSize="16dp"
                 android:textStyle="bold" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -230,9 +230,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Món ăn ngon nhất hôm nay"
+                    android:text="Đang bán chạy"
                     android:textColor="@color/blue_gray"
-                    android:textSize="22dp"
+                    android:textSize="16dp"
                     android:textStyle="bold"/>
 
                 <TextView
