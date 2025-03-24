@@ -34,7 +34,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity {
-private ActivityMainBinding binding;//liên kết các view trong layout activity_main.xml
+private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,9 +67,9 @@ private ActivityMainBinding binding;//liên kết các view trong layout activit
                 if(!text.isEmpty()){
 
                     Intent intent=new Intent(MainActivity.this,ListFoodsActivity.class);
-                    intent.putExtra("text",text);//Thêm dữ liệu "text" với giá trị "text"
-                    intent.putExtra("isSearch",true);//Thêm dữ liệu "isSearch" với giá trị true
-                    startActivity(intent);//Chuyển sang ListFoodsActivity
+                    intent.putExtra("text",text);
+                    intent.putExtra("isSearch",true);
+                    startActivity(intent);
                 }
             }
         });
@@ -78,32 +78,25 @@ private ActivityMainBinding binding;//liên kết các view trong layout activit
     private void initBestFood() {
         //Lấy dữ liệu từ Firebase bảng Foods
         DatabaseReference myRef=database.getReference("Foods");
-        //hiển thị thanh tiến trình (ProgressBar)
         binding.progressBarBestFood.setVisibility(View.VISIBLE);
-        //tạo list chứa dữ liệu danh sách món ăn
         ArrayList<Foods> list=new ArrayList<>();
+
         //Truy vấn dữ liệu từ Firebase bảng Foods với thuộc tinhs BestFood = true
         Query query=myRef.orderByChild("BestFood").equalTo(true);
-        //Lắng nghe sự kiện thay đổi dữ liệu
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            //Hàm này sẽ chạy khi dữ liệu thay đổi
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //Kiểm tra dữ liệu có tồn tại
                 if(snapshot.exists()){
-                    //Duyệt qua các nút con của DataSnapshot
                     for(DataSnapshot issue: snapshot.getChildren()) {
                         list.add(issue.getValue(Foods.class));//Thêm món ăn vào list
                     }
                     //Kiểm tra list có rỗng không, nếu không rỗng thì hiện thị dữ liệu trên recyclerview
                     if(list.size()>0){
-                        //Thiết lập layout cho recyclerview hiển thị dữ liệu theo dang nằm ngang
                         binding.bestFoodView.setLayoutManager(new LinearLayoutManager(MainActivity.this,LinearLayoutManager.HORIZONTAL,false));
-                        RecyclerView.Adapter adapter=new BestFoodsAdapter(list);//Tạo Adapter 'BestFoodsAdapter' với danh sách 'list'
-                        binding.bestFoodView.setAdapter(adapter);//Gán Adapter cho RecyclerView cuar bestFoodView
+                        RecyclerView.Adapter adapter=new BestFoodsAdapter(list);
+                        binding.bestFoodView.setAdapter(adapter);
 
                     }
-                    //Ẩn thanh progressBar
                     binding.progressBarBestFood.setVisibility(View.GONE);
                 }
             }
@@ -118,28 +111,25 @@ private ActivityMainBinding binding;//liên kết các view trong layout activit
     private void initCategory() {
         // Lấy tham chiếu đến nút "Category" trong Firebase Database
         DatabaseReference myRef=database.getReference("Category");
-        // Hiển thị thanh tiến trình (ProgressBar)
         binding.progressBarBestFood.setVisibility(View.VISIBLE);
-        // Tạo list chứa dữ liệu các đối tượng Category
         ArrayList<Category> list=new ArrayList<>();
 
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {//Xử lý sự kiện thay đổi dữ liệu
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
                     // Duyệt qua các nút con của DataSnapshot
                     for(DataSnapshot issue: snapshot.getChildren()) {
-                        list.add(issue.getValue(Category.class));//Thêm đối tượng Category vào list
+                        list.add(issue.getValue(Category.class));
                     }
-                    // Kiểm tra list có rỗng không, nếu không rỗng thì hiện thị dữ liệu trên recyclerview
+
+
                     if(list.size()>0){
-                        //hiển thị dữ liệu theo dạng lưới với 4 cột
                         binding.categoryView.setLayoutManager(new GridLayoutManager(MainActivity.this,4));
-                        RecyclerView.Adapter adapter=new CategoryAdapter(list); // Khởi tạo Adapter 'CategoryAdapter' với danh sách 'list'
-                        binding.categoryView.setAdapter(adapter);// Gán Adapter cho RecyclerView của categoryView
+                        RecyclerView.Adapter adapter=new CategoryAdapter(list);
+                        binding.categoryView.setAdapter(adapter);
 
                     }
-                    //Ẩn thanh progressBar
                     binding.progressBarCategory.setVisibility(View.GONE);
                 }
             }
@@ -152,24 +142,18 @@ private ActivityMainBinding binding;//liên kết các view trong layout activit
     }
 
     private void initLocation() {
-        //Lấy dữ liệu từ Firebase bảng Location
         DatabaseReference myRef=database.getReference("Location");
-        //tạo list chứa dữ liệu danh sách Location
         ArrayList<Location> list=new ArrayList<>();
-        //Lắng nghe sự kiện thay đổi dữ liệu
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
-                    // Duyệt qua các nút con của DataSnapshot
                     for(DataSnapshot issue:snapshot.getChildren()){
-                        list.add(issue.getValue(Location.class));//Thêm đối tượng Location vào list
+                        list.add(issue.getValue(Location.class));
                     }
-                    // Khởi tạo ArrayAdapter để hiển thị dữ liệu trong Spinner
                     ArrayAdapter<Location> adapter=new ArrayAdapter<>(MainActivity.this,R.layout.sp_item,list);
-                    // Thiết lập layout cho dropdown của Spinner
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    binding.locationSp.setAdapter(adapter);//Gán Adapter cho Spinner của locationSp
+                    binding.locationSp.setAdapter(adapter);
                 }
             }
 
@@ -183,9 +167,7 @@ private ActivityMainBinding binding;//liên kết các view trong layout activit
     private void initTime() {
         //Lấy dữ liệu từ Firebase bảng Time
         DatabaseReference myRef=database.getReference("Time");
-        //tạo list chứa dữ liệu danh sách Time
         ArrayList<Time> list=new ArrayList<>();
-        //Lắng nghe sự kiện thay đổi dữ liệu
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -194,11 +176,9 @@ private ActivityMainBinding binding;//liên kết các view trong layout activit
                     for(DataSnapshot issue:snapshot.getChildren()){
                         list.add(issue.getValue(Time.class));//Thêm đối tượng Time vào list
                     }
-                    // Khởi tạo ArrayAdapter để hiển thị dữ liệu trong Spinner
                     ArrayAdapter<Time> adapter=new ArrayAdapter<>(MainActivity.this,R.layout.sp_item,list);
-                    // Thiết lập layout cho dropdown của Spinner
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    binding.timeSp.setAdapter(adapter);//Gán Adapter cho Spinner của timeSp
+                    binding.timeSp.setAdapter(adapter);
                 }
             }
 
@@ -212,22 +192,18 @@ private ActivityMainBinding binding;//liên kết các view trong layout activit
     private void initPrice() {
         //Lấy dữ liệu từ Firebase bảng Price
         DatabaseReference myRef=database.getReference("Price");
-        //tạo list chứa dữ liệu danh sách Price
         ArrayList<Price> list=new ArrayList<>();
-        //Lắng nghe sự kiện thay đổi dữ liệu
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
                     // Duyệt qua các nút con của DataSnapshot
                     for(DataSnapshot issue:snapshot.getChildren()){
-                        list.add(issue.getValue(Price.class));//Thêm đối tượng Price vào list
+                        list.add(issue.getValue(Price.class));
                     }
-                    // Khởi tạo ArrayAdapter để hiển thị dữ liệu trong Spinner
                     ArrayAdapter<Price> adapter=new ArrayAdapter<>(MainActivity.this,R.layout.sp_item,list);
-                    // Thiết lập layout cho dropdown của Spinner
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    binding.priceSp.setAdapter(adapter);//Gán Adapter cho Spinner của priceSp
+                    binding.priceSp.setAdapter(adapter);
                 }
             }
 

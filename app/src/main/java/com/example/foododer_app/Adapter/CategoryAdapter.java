@@ -34,16 +34,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.viewho
     @Override
     public CategoryAdapter.viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {// Phương thức tạo ViewHolder
         context=parent.getContext();
-        //// Khởi tạo view từ layout viewholder_category
         View inflate= LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_category,parent,false);
         return new viewholder(inflate);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.viewholder holder, int position) {// Phương thức bind dữ liệu cho ViewHolder
-        // Thiết lập văn bản cho TextView 'titleTxt' với tên của danh mục
         holder.titleTxt.setText(items.get(position).getName());
-        // Thiết lập background cho ImageView 'pic' dựa trên vị trí của danh mục
         switch (position){
             case 0: {
                 holder.pic.setBackgroundResource(R.drawable.cat_0_background);
@@ -79,22 +76,17 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.viewho
             }
 
         }
-        // Tải ảnh cho ImageView 'pic' từ drawable
         int drawableResourceId=context.getResources().getIdentifier(
                 items.get(position).getImagePath(),"drawable"
                 ,holder.itemView.getContext().getPackageName());
-        // Sử dụng thư viện Glide để tải ảnh
         Glide.with(context)
                 .load(drawableResourceId)
                 .into(holder.pic);
 
-        // Thiết lập sự kiện click cho mỗi item trong RecyclerView
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Tạo Intent để chuyển sang Activity ListFoodsActivity
                 Intent intent=new Intent(context, ListFoodsActivity.class);
-                // Truyền ID và tên của danh mục vào Intent
                 intent.putExtra("CategoryId",items.get(position).getId());
                 intent.putExtra("CategoryName",items.get(position).getName());
                 // Khởi động Activity ListFoodsActivity
@@ -110,7 +102,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.viewho
     }
 
 
-    public class viewholder extends RecyclerView.ViewHolder{// Lớp ViewHolder để lưu trữ các view trong item
+    public class viewholder extends RecyclerView.ViewHolder{
         TextView titleTxt;
         ImageView pic;
         public viewholder(@NonNull View itemView) {

@@ -29,7 +29,6 @@ public class FoodsListAdapter extends RecyclerView.Adapter<FoodsListAdapter.view
     @Override
     public FoodsListAdapter.viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {// Phương thức tạo ViewHolder
         context = parent.getContext();
-        // Khởi tạo view từ layout viewholder_list_food
         View inflate= LayoutInflater.from(context).inflate(R.layout.viewholder_list_food,parent,false);
         return new viewHolder(inflate);
     }
@@ -54,7 +53,7 @@ public class FoodsListAdapter extends RecyclerView.Adapter<FoodsListAdapter.view
     public int getItemCount() {
         return items.size();
     }
-    public class viewHolder extends RecyclerView.ViewHolder {// Lớp ViewHolder để lưu trữ các view trong item
+    public class viewHolder extends RecyclerView.ViewHolder {
         TextView titleTxt,priceTxt,rateTxt,timeTxt;
         ImageView pic;
         public viewHolder(@NonNull View itemView) {

@@ -20,7 +20,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 
 public class SignupActivity extends BaseActivity {
-    ActivitySignupBinding binding;//liên kết các view trong layout activity_signup.xml
+    ActivitySignupBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,14 +28,12 @@ public class SignupActivity extends BaseActivity {
         binding=ActivitySignupBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        setVariable();//thiết lập các biến vào activity
+        setVariable();
 
     }
 
     private void setVariable() {
-        //thêm sự kiện cho button signup
         binding.signupBtn.setOnClickListener(v -> {
-            //lấy thông tin vào các biến
             String email=binding.userEdt.getText().toString();
             String password=binding.passEdt.getText().toString();
             String repeatpassword=binding.repeatpassEdt.getText().toString();
@@ -59,12 +57,9 @@ public class SignupActivity extends BaseActivity {
                 Toast.makeText(SignupActivity.this,"Mật khẩu không đúng!",Toast.LENGTH_SHORT).show();
                 return;
             }
-            //Tạo tài khoản bằng email và password
             mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(SignupActivity.this, task -> {
                 if(task.isComplete()){
-                    //Tạo tài khoản thành công
                     Log.i(TAG,"Hoàn thành: ");//in ra thông tin
-                    //đăng nhập
                     startActivity(new Intent(SignupActivity.this, LoginActivity.class));
                 }else {
                     Log.i(TAG,"Thất bại: "+task.getException());

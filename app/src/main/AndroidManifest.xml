@@ -34,10 +34,6 @@
         <activity
             android:name=".Activiy.BaseActivity"
             android:exported="false" />
-        <activity
-            android:name=".Activiy.IntroActivity"
-            android:exported="false">
-        </activity>
     </application>
 
 </manifest>

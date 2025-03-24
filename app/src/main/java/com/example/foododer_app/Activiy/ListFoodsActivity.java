@@ -25,12 +25,12 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class ListFoodsActivity extends BaseActivity {
-    ActivityListFoodsBinding binding;// Liên kết các view trong layout activity_list_foods.xml
-    private RecyclerView.Adapter adapterListFood;// Biến để lưu trữ Adapter cho RecyclerView
-    private int categoryId;//Biến để lưu trữ ID của loại món ăn
-    private String categoryName;// Biến để lưu trữ tên loại món ăn
-    private String searchText;// Biến để lưu trữ từ khóa tìm kiếm
-    private boolean isSearch;// Biến để xác định xem có đang thực hiện tìm kiếm hay không
+    ActivityListFoodsBinding binding;
+    private RecyclerView.Adapter adapterListFood;
+    private int categoryId;
+    private String categoryName;
+    private String searchText;
+    private boolean isSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,6 @@ public class ListFoodsActivity extends BaseActivity {
     private void setVariable() {
 
     }
-    // Khởi tạo danh sách món ăn
     private void initList() {
         // Lấy tham chiếu đến nút "Foods" trong Firebase Database
         DatabaseReference myRef = database.getReference("Foods");
@@ -55,9 +54,7 @@ public class ListFoodsActivity extends BaseActivity {
         // Khởi tạo danh sách món ăn
         ArrayList<Foods> list=new ArrayList<>();
 
-        //Biến lưu trữ truy vấn
         Query query;
-        // Kiểm tra xem đang thực hiện tìm kiếm hay không
         if(isSearch){
             /// Tạo truy vấn tìm kiếm theo tiêu đề (Title)
             query=myRef.orderByChild("Title").startAt(searchText).endAt(searchText+"\uf8ff");
@@ -67,20 +64,16 @@ public class ListFoodsActivity extends BaseActivity {
         }
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {//xử lý dữ liệu thay đổi
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
                 // Kiểm tra xem dữ liệu có tồn tại hay không
                 if(snapshot.exists()){
                     // Lấy danh sách món ăn từ dataSnapshot
                     for(DataSnapshot issue :snapshot.getChildren()){
-                        list.add(issue.getValue(Foods.class));//Thêm món ăn vào danh sách dưới dạng đối tượng Foods
+                        list.add(issue.getValue(Foods.class));
                     }
-                    // Kiểm tra xem danh sách món ăn có rỗng hay không
                     if(list.size()>0){
-                        // Hiển thị danh sách món ăn theo dạng lưới 2 cột
                         binding.foodlistView.setLayoutManager(new GridLayoutManager(ListFoodsActivity.this,2));
-                        // Khởi tạo Adapter 'FoodsListAdapter' với danh sách 'list'
                         adapterListFood=new FoodsListAdapter(list);
-                        // Liên kết Adapter 'adapterListFood' với RecyclerView 'binding.foodlistView'
                         binding.foodlistView.setAdapter(adapterListFood);
 
                     }
@@ -103,9 +96,7 @@ public class ListFoodsActivity extends BaseActivity {
         searchText=getIntent().getStringExtra("text");
         isSearch=getIntent().getBooleanExtra("isSearch",false);
 
-        // Thiết lập văn bản cho TextView
         binding.titleTxt.setText(categoryName);
-        // Thiết lập sự kiện cho nút "Back"
         binding.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
